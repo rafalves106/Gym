@@ -2,19 +2,24 @@ namespace Domain.Entities;
 
 public class Treino
 {
-  private Guid _id;
-  private string _nome = string.Empty;
-  private List<Exercicio> _exercicios;
-  private DateTime _dataCriacao;
-  private bool _ativo;
+  public Guid Id { get; private set; }
+  public string Nome { get; private set; } = null!;
+  private readonly List<Exercicio> _exercicios = new();
+  public IReadOnlyCollection<Exercicio> Exercicios => _exercicios.AsReadOnly();
+  public DateTime DataCriacao { get; private set; }
+  public bool Ativo { get; private set; }
 
-  private Treino(Guid id, string nome, List<Exercicio> exercicios, DateTime dataCriacao, bool ativo)
+  private Treino() { }
+
+  public Treino(Guid id, string nome, DateTime dataCriacao, bool ativo)
   {
-    _id = id;
-    _nome = nome;
-    _exercicios = new List<Exercicio>();
-    _dataCriacao = dataCriacao;
-    _ativo = ativo;
+    ValidarNome(nome);
+    ValidarDataCriacao(dataCriacao);
+
+    Id = id;
+    Nome = nome;
+    DataCriacao = dataCriacao;
+    Ativo = ativo;
   }
 
   private static void ValidarNome(string nome)

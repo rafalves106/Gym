@@ -2,25 +2,27 @@ namespace Domain.Entities;
 
 public class Exercicio
 {
-  private Guid _id;
-  private string _nome = string.Empty;
-  private int _repeticoes;
-  private int _series;
-  private int _descanso;
+  public Guid Id { get; private set; }
+  public string Nome { get; private set; } = null!;
+  public int Repeticoes { get; private set; }
+  public int Series { get; private set; }
+  public int Descanso { get; private set; }
+  public Guid TreinoId { get; private set; }
+  private Exercicio() { }
 
-
-  private Exercicio(Guid id, string nome, int repeticoes, int series, int descanso)
+  public Exercicio(Guid id, Guid treinoId, string nome, int repeticoes, int series, int descanso)
   {
     ValidarNome(nome);
     ValidarRepeticoes(repeticoes);
     ValidarSeries(series);
     ValidarDescanso(descanso);
 
-    _id = new Guid();
-    _nome = nome;
-    _repeticoes = repeticoes;
-    _series = series;
-    _descanso = descanso;
+    Id = id;
+    TreinoId = treinoId;
+    Nome = nome;
+    Repeticoes = repeticoes;
+    Series = series;
+    Descanso = descanso;
   }
 
   private static void ValidarNome(string nome)
@@ -65,24 +67,24 @@ public class Exercicio
   public void AlterarNome(string novoNome)
   {
     ValidarNome(novoNome);
-    _nome = novoNome;
+    Nome = novoNome;
   }
 
   public void AlterarRepeticoes(int novasRepeticoes)
   {
     ValidarRepeticoes(novasRepeticoes);
-    _repeticoes = novasRepeticoes;
+    Repeticoes = novasRepeticoes;
   }
 
   public void AlterarSeries(int novasSeries)
   {
     ValidarSeries(novasSeries);
-    _series = novasSeries;
+    Series = novasSeries;
   }
 
   public void AlterarDescanso(int novoDescanso)
   {
     ValidarDescanso(novoDescanso);
-    _descanso = novoDescanso;
+    Descanso = novoDescanso;
   }
 }
