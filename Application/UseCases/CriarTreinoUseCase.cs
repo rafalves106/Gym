@@ -4,7 +4,7 @@ using Domain.Entities;
 
 namespace Application.UseCases;
 
-public class CriarTreinoUseCase(ITreinoRepository _treinoRepository) : ICriarTreinoUseCase
+public class CriarTreinoUseCase(ITreinoRepository treinoRepository) : ICriarTreinoUseCase
 {
   public async Task<Guid> ExecutarAsync(CriarTreinoInputDTO input)
   {
@@ -15,7 +15,7 @@ public class CriarTreinoUseCase(ITreinoRepository _treinoRepository) : ICriarTre
       ativo: input.Ativo
     );
 
-    await _treinoRepository.CriarAsync(treino);
+    await treinoRepository.CriarAsync(treino);
 
     return treino.Id;
   }
