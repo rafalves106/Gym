@@ -1,31 +1,39 @@
 using Domain.Entities;
 using Domain.Repositories;
+using Infrastructure.Data;
+using Microsoft.EntityFrameworkCore;
 namespace Infrastructure.Repositories;
 
-public class TreinoRepository : ITreinoRepository
+public class TreinoRepository(GymDbContext context) : ITreinoRepository
 {
-  public Task AtualizarAsync(Treino treinoAtualizado)
+  public async Task AtualizarAsync(Treino treinoAtualizado)
   {
-    throw new NotImplementedException();
+    context.Treinos.Update(treinoAtualizado);
+    await context.SaveChangesAsync();
   }
 
-  public Task CriarAsync(Treino treino)
+  public async Task CriarAsync(Treino treino)
   {
-    throw new NotImplementedException();
+    await context.Treinos.AddAsync(treino);
+    await context.SaveChangesAsync();
   }
 
-  public Task<Treino?> ObterPorIdAsync(Guid id)
+  public async Task<Treino?> ObterPorIdAsync(Guid id)
   {
-    throw new NotImplementedException();
+    return await context.Treinos
+      .Include(t => t.Exercicios)
+      .FirstOrDefaultAsync(t => t.Id == id);
   }
 
-  public Task<IEnumerable<Treino>> ObterTodosAsync()
+  public async Task<IEnumerable<Treino>> ObterTodosAsync()
   {
-    throw new NotImplementedException();
+    return await context.Treinos.ToListAsync();
   }
 
-  public Task RemoverAsync(Treino treino)
+  public async Task RemoverAsync(Treino treino)
   {
-    throw new NotImplementedException();
+    context.Treinos.Remove(treino);
+    await context.SaveChangesAsync();
   }
+
 }
