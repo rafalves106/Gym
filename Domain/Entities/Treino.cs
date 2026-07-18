@@ -22,6 +22,22 @@ public class Treino
     Ativo = ativo;
   }
 
+  public void AlterarNome(string novoNome)
+  {
+    ValidarNome(novoNome);
+    Nome = novoNome;
+  }
+
+  public void Ativar()
+  {
+    Ativo = true;
+  }
+
+  public void Desativar()
+  {
+    Ativo = false;
+  }
+
   private static void ValidarNome(string nome)
   {
     if (string.IsNullOrWhiteSpace(nome))
