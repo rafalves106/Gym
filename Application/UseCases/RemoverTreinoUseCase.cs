@@ -11,7 +11,7 @@ public class RemoverTreinoUseCase(ITreinoRepository treinoRepository) : IRemover
 
     if (treino == null)
     {
-      throw new Exception("Treino não encontrado");
+      throw new KeyNotFoundException("Treino não encontrado.");
     }
 
     await treinoRepository.RemoverAsync(treino);

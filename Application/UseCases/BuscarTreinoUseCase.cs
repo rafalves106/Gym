@@ -10,7 +10,7 @@ public class BuscarTreinoUseCase(ITreinoRepository treinoRepository) : IBuscarTr
     var treino = await treinoRepository.ObterPorIdAsync(input.Id);
 
     if (treino is null)
-      throw new Exception("Treino não encontrado");
+      throw new KeyNotFoundException("Treino não encontrado.");
 
     var exerciciosDTO = treino.Exercicios.Select(exercicio => new ExercicioDTO
     {

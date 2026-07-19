@@ -3,5 +3,5 @@ namespace Application.UseCases;
 
 public interface IEditarTreinoUseCase
 {
-  Task<bool> Execute(EditarTreinoInputDTO input);
+  Task<bool> ExecutarAsync(Guid id, EditarTreinoInputDTO input);
 }

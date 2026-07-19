@@ -5,12 +5,12 @@ namespace Application.UseCases;
 
 public class EditarTreinoUseCase(ITreinoRepository treinoRepository) : IEditarTreinoUseCase
 {
-  public async Task<bool> Execute(EditarTreinoInputDTO input)
+  public async Task<bool> ExecutarAsync(Guid id, EditarTreinoInputDTO input)
   {
-    var treino = await treinoRepository.ObterPorIdAsync(input.Id);
+    var treino = await treinoRepository.ObterPorIdAsync(id);
 
     if (treino is null)
-      throw new Exception("Treino não encontrado");
+      throw new KeyNotFoundException("Treino não encontrado.");
 
     treino.AlterarNome(input.Nome);
 
