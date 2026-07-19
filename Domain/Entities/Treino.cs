@@ -56,10 +56,20 @@ public class Treino
       throw new ArgumentException("Data de criação não pode ser no futuro.");
   }
 
+  public void AdicionarExercicio(string nome, int series, int repeticoes, int descanso)
+  {
+    var exercicio = new Exercicio(Guid.NewGuid(), this.Id, nome, series, repeticoes, descanso);
+
+    AdicionarExercicio(exercicio);
+  }
+
   public void AdicionarExercicio(Exercicio exercicio)
   {
-    if (exercicio == null)
-      throw new ArgumentNullException(nameof(exercicio), "Exercício não pode ser nulo.");
+    if (exercicio is null)
+      throw new ArgumentNullException(nameof(exercicio));
+
+    if (exercicio.TreinoId != this.Id)
+      throw new InvalidOperationException("Não é possível adicionar um exercício que pertence a outro treino.");
 
     _exercicios.Add(exercicio);
   }
