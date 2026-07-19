@@ -25,7 +25,7 @@ public class TreinoController(
   {
     try
     {
-      var result = await editarTreinoUseCase.Execute(id, request);
+      var result = await editarTreinoUseCase.ExecutarAsync(id, request);
       return Ok(result);
     }
     catch (KeyNotFoundException ex)
