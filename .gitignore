@@ -131,3 +131,6 @@ _NCrunch*
 
 # Environment variable files
 .env
+
+# SQLite database files
+*.db*
